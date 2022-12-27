@@ -1,0 +1,141 @@
+
+import java.awt.*;
+import javax.swing.*;
+ 
+public class BouncingBox extends JPanel {
+ 
+
+ /** Esguerra, Desiree E. - BSIT -2A 
+   * IT152 - Double Buffering Activity
+   * submitted: 12/27/22
+   */
+	
+	private static final long serialVersionUID = 1L;
+private long rstart;
+	private long rend;
+  
+  int width;
+  int height;
+
+
+  //box 1
+  float radius = 40; 
+  float diameter = radius * 2;
+  float X = radius + 50;
+  float Y = radius + 20;
+  float dy = 1;
+  float dx = 1;
+ 
+  //added two more boxes (box2 and box3)
+  //box2
+  float radius1 = 40; 
+  float diameter1 = radius * 2;
+  float X1 = radius + 50;
+  float Y1 = radius + 20;
+  float dy1 = 3;
+  float dx1 = 3;
+  
+  //box3
+  float radius2 = 40; 
+  float diameter2 = radius * 2;
+  float X2 = radius + 50;
+  float Y2 = radius + 20;
+  float dy2 = 5;
+  float dx2 = 5;
+  
+  public BouncingBox() {
+ 
+    Thread thread = new Thread() {
+      public void run() {
+        while (true) {
+ 
+          width = getWidth();
+          height = getHeight();
+ 
+          X = X + dx;
+          Y = Y + dy;
+
+ 
+          if (X - radius < 0) {
+            dx = -dx; 
+            X = radius; 
+          } else if (X + radius > width) {
+            dx = -dx;
+            X = width - radius;
+          }
+ 
+          if (Y - radius < 0) {
+            dy = -dy;
+            Y = radius;
+          } else if (Y + radius > height) {
+            dy = -dy;
+            Y = height - radius;
+          }
+          
+          if (X1 - radius1 < 0) {
+              dx1 = -dx1; 
+              X1 = radius1; 
+            } else if (X1 + radius1 > width) {
+              dx1 = -dx1;
+              X1 = width - radius1;
+            }
+
+            if (Y1 - radius1 < 0) {
+              dy1 = -dy1;
+              Y1 = radius1;
+            } else if (Y1 + radius1 > height) {
+              dy1 = -dy1;
+              Y1 = height - radius1;
+            }
+
+            if (X2 - radius2 < 0) {
+              dx2 = -dx2; 
+              X2 = radius2; 
+            } else if (X2 + radius2 > width) {
+              dx2 = -dx2;
+              X2 = width - radius2;
+            }
+
+            if (Y2 - radius2 < 0) {
+              dy2 = -dy2;
+              Y2 = radius2;
+            } else if (Y2 + radius2 > height) {
+              dy2 = -dy2;
+              Y2 = height - radius2;
+            }
+            
+          repaint();
+ 
+          try {
+            Thread.sleep(7-(rend-rstart));
+          } catch (InterruptedException ex) {
+          }
+ 
+        }
+      }
+    };
+    thread.start();
+  }
+ 
+  public void paintComponent(Graphics g) {
+	  super.paintComponent(g);
+	  setBackground(Color.BLACK); //to set the background color
+	  g.setColor(Color.white);
+	  g.fillRect((int)(X-radius), (int)(Y-radius), (int)diameter, (int)diameter);
+	  g.setColor(Color.cyan);
+	  g.fillRect((int)(X1-radius1), (int)(Y1-radius1), (int)diameter1, (int)diameter1);
+	  g.setColor(Color.orange);
+	  g.fillRect((int)(X2-radius2), (int)(Y2-radius2), (int)diameter2, (int)diameter2);
+	}
+
+  public static void main(String[] args) {
+	  
+	  BouncingBox fr = new BouncingBox();
+
+	  JFrame frame = new JFrame("Bouncing Box");
+	  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  frame.setSize(500, 500);
+	  frame.setContentPane(new BouncingBox());
+	  frame.setVisible(true);
+	}
+}
