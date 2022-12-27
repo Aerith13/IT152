@@ -27,7 +27,7 @@ public class BouncingBox extends JPanel {
   float dy = 1;
   float dx = 1;
  
-  //added two more boxes (box2 and box3)
+  //initialize the position variables for the additional two boxes (box2,box3)
   //box2
   float radius1 = 40; 
   float diameter1 = radius * 2;
@@ -61,6 +61,7 @@ public class BouncingBox extends JPanel {
 
           X2 = X2 + dx2;
           Y2 = Y2 + dy2;
+	  
           if (X - radius < 0) {
             dx = -dx; 
             X = radius; 
@@ -77,6 +78,7 @@ public class BouncingBox extends JPanel {
             Y = height - radius;
           }
           
+	  //check for collisions with the edges of the window for the additional two boxes in the 'run' method
           if (X1 - radius1 < 0) {
               dx1 = -dx1; 
               X1 = radius1; 
