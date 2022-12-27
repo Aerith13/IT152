@@ -1,17 +1,18 @@
 
+/** Esguerra, Desiree E. - BSIT -2A 
+   * IT152 - Double Buffering Activity
+   * submitted: 12/27/22
+   */
+ 
+ //------------------------------------------------
+ 
 import java.awt.*;
 import javax.swing.*;
  
 public class BouncingBox extends JPanel {
- 
-
- /** Esguerra, Desiree E. - BSIT -2A 
-   * IT152 - Double Buffering Activity
-   * submitted: 12/27/22
-   */
 	
 	private static final long serialVersionUID = 1L;
-private long rstart;
+	private long rstart;
 	private long rend;
   
   int width;
@@ -32,16 +33,16 @@ private long rstart;
   float diameter1 = radius * 2;
   float X1 = radius + 50;
   float Y1 = radius + 20;
-  float dy1 = 3;
-  float dx1 = 3;
+  float dy1 = 4;
+  float dx1 = 4;
   
   //box3
   float radius2 = 40; 
   float diameter2 = radius * 2;
   float X2 = radius + 50;
   float Y2 = radius + 20;
-  float dy2 = 5;
-  float dx2 = 5;
+  float dy2 = 9;
+  float dx2 = 9;
   
   public BouncingBox() {
  
@@ -55,7 +56,11 @@ private long rstart;
           X = X + dx;
           Y = Y + dy;
 
- 
+          X1 = X1 + dx1;
+          Y1 = Y1 + dy1;
+
+          X2 = X2 + dx2;
+          Y2 = Y2 + dy2;
           if (X - radius < 0) {
             dx = -dx; 
             X = radius; 
@@ -119,12 +124,12 @@ private long rstart;
  
   public void paintComponent(Graphics g) {
 	  super.paintComponent(g);
-	  setBackground(Color.BLACK); //to set the background color
-	  g.setColor(Color.white);
+	  setBackground(Color.BLACK); //added to set the background color to black (my eyes hurt)
+	  g.setColor(Color.white); //box1 color
 	  g.fillRect((int)(X-radius), (int)(Y-radius), (int)diameter, (int)diameter);
-	  g.setColor(Color.cyan);
+	  g.setColor(Color.cyan); //box2 color
 	  g.fillRect((int)(X1-radius1), (int)(Y1-radius1), (int)diameter1, (int)diameter1);
-	  g.setColor(Color.orange);
+	  g.setColor(Color.orange); //box3 color
 	  g.fillRect((int)(X2-radius2), (int)(Y2-radius2), (int)diameter2, (int)diameter2);
 	}
 
